@@ -1,0 +1,29 @@
+<svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+  <rect width="520" height="320" rx="18" fill="#f0f4ff"/>
+  <g fill="#fff" stroke="#1f5eff" stroke-width="2">
+    <rect x="60" y="40" width="140" height="120" rx="14"/>
+    <rect x="320" y="40" width="140" height="120" rx="14"/>
+    <rect x="190" y="200" width="140" height="100" rx="14"/>
+  </g>
+  <g font-family="Segoe UI, Arial" font-size="14" fill="#0b2f91">
+    <text x="130" y="60" text-anchor="middle" font-weight="700">users</text>
+    <text x="390" y="60" text-anchor="middle" font-weight="700">events</text>
+    <text x="260" y="220" text-anchor="middle" font-weight="700">event_registrations</text>
+    <text x="80" y="90">id (PK)</text>
+    <text x="80" y="110">name</text>
+    <text x="80" y="130">email</text>
+    <text x="80" y="150">password</text>
+    <text x="80" y="170">role</text>
+    <text x="340" y="90">id (PK)</text>
+    <text x="340" y="110">title</text>
+    <text x="340" y="130">event_date</text>
+    <text x="340" y="150">description</text>
+    <text x="210" y="250">id (PK)</text>
+    <text x="210" y="270">user_id (FK)</text>
+    <text x="210" y="290">event_id (FK)</text>
+  </g>
+  <g stroke="#ff8a5c" stroke-width="3">
+    <line x1="130" y1="160" x2="230" y2="220"/>
+    <line x1="390" y1="160" x2="290" y2="220"/>
+  </g>
+</svg>

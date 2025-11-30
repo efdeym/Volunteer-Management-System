@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Volunteer Management System (VMS)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<script defer src="script.js"></script>
+</head>
+<body class="site-body">
+<header class="site-hero">
+  <nav class="site-nav">
+    <div class="brand">
+      <img src="assets/logo.svg" alt="VMS logo">
+      <span>VMS</span>
+    </div>
+    <button class="nav-toggle" data-nav-toggle aria-label="Toggle navigation">Menu</button>
+    <div class="nav-links" data-nav>
+      <a href="#events">Events</a>
+      <a href="#why">Why VMS</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#cta" class="pill">Get Started</a>
+    </div>
+  </nav>
+  <div class="hero-grid">
+    <div>
+      <p class="eyebrow">Volunteer Management System</p>
+      <h1>Mobilize Volunteers. Run Successful Events.</h1>
+      <p class="lead">A modern workflow where volunteers self-register, explore curated events, and admins keep everything organized.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="signup.php">Register as Volunteer</a>
+        <a class="btn secondary" href="login.php">Log In</a>
+      </div>
+      <div class="stats-row" data-stat-group>
+        <article class="stat-card">
+          <h2 data-stat="volunteers">0</h2>
+          <p>Registered Volunteers</p>
+        </article>
+        <article class="stat-card">
+          <h2 data-stat="events">0</h2>
+          <p>Active Events</p>
+        </article>
+        <article class="stat-card">
+          <h2 data-stat="hours">0</h2>
+          <p>Hours Logged</p>
+        </article>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="assets/hero-illustration.svg" alt="Hero illustration">
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section-grid" id="why">
+    <article class="feature-card">
+      <img src="assets/icon-volunteer.svg" alt="Volunteer icon">
+      <h3>Volunteer Experience</h3>
+      <p>Guided signup, personalized dashboards, and one-click participation keep volunteers motivated.</p>
+    </article>
+    <article class="feature-card">
+      <img src="assets/icon-admin.svg" alt="Admin icon">
+      <h3>Admin Toolkit</h3>
+      <p>Role-based access, approvals, and event CRUD features empower coordinators without extra plugins.</p>
+    </article>
+    <article class="feature-card">
+      <img src="assets/icon-event.svg" alt="Event icon">
+      <h3>Event Intelligence</h3>
+      <p>Event cards and analytics snapshots highlight volunteer demand and fill rates.</p>
+    </article>
+  </section>
+
+  <section class="section" id="events">
+    <header class="section-header">
+      <h2>Featured Events</h2>
+      <p>Powered by live data from <code>events</code> table.</p>
+    </header>
+    <div class="cards" data-event-grid></div>
+    <div class="center">
+      <a class="btn ghost" href="dashboard.php">View Dashboard</a>
+    </div>
+  </section>
+
+  <section class="section" id="timeline">
+    <header class="section-header">
+      <h2>Launch Timeline</h2>
+      <p>Follow these phases to go live within a week.</p>
+    </header>
+    <ul class="timeline" data-timeline></ul>
+  </section>
+
+  <section class="section" id="cta">
+    <div class="cta-grid">
+      <div>
+        <h2>Ready to deploy the Volunteer Management System?</h2>
+        <p>Copy the PHP bundle into <strong>C:/xampp/htdocs/vms</strong>, import the database, and start welcoming volunteers today.</p>
+        <ul class="checklist">
+          <li>Responsive design</li>
+          <li>Secure authentication</li>
+          <li>Admin governance</li>
+        </ul>
+      </div>
+      <div class="cta-actions">
+        <a class="btn primary" href="signup.php">Create Volunteer Profile</a>
+        <a class="btn secondary" href="admin.php">Admin Console</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  Built by Codex AI • ID GPT5-CX-092 • Intelligent Web Systems — OpenAI University
+</footer>
+</body>
+</html>
