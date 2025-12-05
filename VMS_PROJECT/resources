@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Volunteer Resources </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<script defer src="script.js"></script>
+<header class="site-hero">
+  <nav class="site-nav">
+    <div class="brand">
+      <img src="assets/logo.svg" alt="VMS logo">
+    </div>
+    <div class="nav-name">Resources</div>
+    <button class="nav-toggle" data-nav-toggle aria-label="Toggle navigation">Menu</button>
+   <div class="nav-links" data-nav>
+       <a href="index.html" class="pill">Home</a>
+       <a href="about.html" class="pill">About</a>
+       <a href="programs.html" class="pill">Programs</a>
+       <a href="resources.html" class="pill">Resources</a>
+       <a href="partners.html" class="pill">Partners</a>
+       <a href="contact.html" class="pill">Contact</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle color theme">Shift Colors</button>
+    </div>
+    </div>
+  </nav>
+  <div class="hero-grid">
+    <div>
+      <p class="eyebrow">Resource Library</p>
+      <h1>Guides, checklists, and forms for every shift.</h1>
+      <p class="lead">Use these ready-to-run resources to keep volunteers informed, safe, and celebrated.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="database.sql">Download Schema</a>
+        <a class="btn secondary" href="final_project_documentation.html">Read Docs</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="assets/page-resources.svg" alt="Resource illustration">
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section resource-kit">
+    <header class="section-header">
+      <h2>Volunteer Starter Kit</h2>
+      <p>Prebuilt assets to share before the first day.</p>
+    </header>
+    <div class="section-grid">
+      <article class="section">
+        <h3>Orientation Deck</h3>
+        <p>Slides covering mission, logistics, safety, and success stories.</p>
+        <a class="btn ghost" href="#">Download</a>
+      </article>
+      <article class="section">
+        <h3>Welcome Email Copy</h3>
+        <p>Personalized template with scheduling links and FAQs.</p>
+        <a class="btn ghost" href="#">Copy Text</a>
+      </article>
+      <article class="section">
+        <h3>Shift Checklist</h3>
+        <p>Printable reminders for registration tables and crew leads.</p>
+        <a class="btn ghost" href="#">Save PDF</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section ">
+    <article class="feature-card">
+      <img src="assets/icon-volunteer.svg" alt="">
+      <h3>Training Paths</h3>
+      <p>Bundle micro-learning modules and automate reminders when certifications are due.</p>
+    </article>
+    <article class="feature-card">
+      <img src="assets/icon-admin.svg" alt="">
+      <h3>Data Playbooks</h3>
+      <p>SQL snippets reveal attendance trends, volunteer retention, and supply usage.</p>
+    </article>
+    <article class="feature-card">
+      <img src="assets/icon-event.svg" alt="">
+      <h3>Story Bank</h3>
+      <p>Collect testimonials, photos, and quick stats to fuel newsletters.</p>
+    </article>
+  </section>
+
+  <section class="section">
+    <header class="section-header">
+      <h2>Office Hours</h2>
+      <p>Bring your questions and we will pair you with a product specialist.</p>
+    </header>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Topic</th>
+            <th>Format</th>
+            <th>Registration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Volunteer Engagement 101</td>
+            <td>Live 45 min webinar</td>
+            <td><a href="#">Reserve Seat</a></td>
+          </tr>
+          <tr>
+            <td>Advanced Reporting</td>
+            <td>Hands-on lab</td>
+            <td><a href="#">Join Waitlist</a></td>
+          </tr>
+          <tr>
+            <td>Admin Automation</td>
+            <td>Office hours</td>
+            <td><a href="#">Book a slot</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  Resource links update quarterly ? Check back for fresh toolkits.
+</footer>
+</body>
+</html>
