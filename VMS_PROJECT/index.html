@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Volunteer Management System (VMS)</title>
+<title>VolunteerHub</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style.css">
 <script defer src="script.js"></script>
@@ -12,21 +12,24 @@
   <nav class="site-nav">
     <div class="brand">
       <img src="assets/logo.svg" alt="VMS logo">
-      <span>VMS</span>
     </div>
+    <div class="nav-name">Home</div>
     <button class="nav-toggle" data-nav-toggle aria-label="Toggle navigation">Menu</button>
     <div class="nav-links" data-nav>
-      <a href="#events">Events</a>
-      <a href="#why">Why VMS</a>
-      <a href="#timeline">Timeline</a>
-      <a href="#cta" class="pill">Get Started</a>
+       <a href="index.html" class="pill">Home</a>
+       <a href="about.html" class="pill">About</a>
+       <a href="programs.html" class="pill">Programs</a>
+       <a href="resources.html" class="pill">Resources</a>
+       <a href="partners.html" class="pill">Partners</a>
+       <a href="contact.html" class="pill">Contact</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle color theme">Shift Colors</button>
     </div>
   </nav>
   <div class="hero-grid">
     <div>
-      <p class="eyebrow">Volunteer Management System</p>
-      <h1>Mobilize Volunteers. Run Successful Events.</h1>
-      <p class="lead">A modern workflow where volunteers self-register, explore curated events, and admins keep everything organized.</p>
+      <p class="eyebrow">VolunteerHub</p>
+      <h1>Mobilize Volunteers.<br> Create Impactful Events.</h1>
+      <p class="lead">An organized, accessible, and user-friendly platform designed to connect volunteers with community and non-governmental organizations, making volunteering easier to manage and more impactful for everyone involved. </p>
       <div class="hero-actions">
         <a class="btn primary" href="signup.php">Register as Volunteer</a>
         <a class="btn secondary" href="login.php">Log In</a>
@@ -53,21 +56,21 @@
 </header>
 
 <main>
-  <section class="section-grid" id="why">
+  <section class="section" id="why">
     <article class="feature-card">
       <img src="assets/icon-volunteer.svg" alt="Volunteer icon">
       <h3>Volunteer Experience</h3>
-      <p>Guided signup, personalized dashboards, and one-click participation keep volunteers motivated.</p>
+      <p>Guided signup, personalized dashboards, and one-click participation keep volunteers motivated and make volunteering simple, enjoyable, and rewarding.</p>
     </article>
     <article class="feature-card">
       <img src="assets/icon-admin.svg" alt="Admin icon">
       <h3>Admin Toolkit</h3>
-      <p>Role-based access, approvals, and event CRUD features empower coordinators without extra plugins.</p>
+      <p>A clean and intuitive dashboard where coordinators can assign roles, review registrations, manage events, and stay in controlâ€”no additional software required.</p>
     </article>
     <article class="feature-card">
       <img src="assets/icon-event.svg" alt="Event icon">
       <h3>Event Intelligence</h3>
-      <p>Event cards and analytics snapshots highlight volunteer demand and fill rates.</p>
+      <p>Smart dashboards and event cards provide clear snapshots of volunteer interest, and participation trends, helping coordinators manage everything effortlessly.</p>
     </article>
   </section>
 
@@ -110,7 +113,7 @@
 </main>
 
 <footer class="site-footer">
-  Built by Codex AI • ID GPT5-CX-092 • Intelligent Web Systems — OpenAI University
+  ASU-CENG361 Project
 </footer>
 </body>
 </html>
