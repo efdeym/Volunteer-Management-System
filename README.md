@@ -14,5 +14,6 @@ Features
  Technologies Used
  **HTML5** – page structure
  **CSS3** – styling, responsive layout, and gradient backgrounds
- **Custom Variables** – theme colors (`--primary`, `--card`, `--bg`, etc.)
- **Dark Mode** – alternative look via `body.theme-alt`
+ **JavaScript** – interactive elements and dynamic behavior
+ **PHP** – server-side scripting and backend logic
+ **SQL** – database design and queries for storing volunteers, events, and resources
