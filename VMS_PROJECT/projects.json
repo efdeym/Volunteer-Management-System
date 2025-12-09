@@ -1,0 +1,122 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Community Garden Expansion",
+    "summary": "Build additional raised beds and irrigation for the community garden.",
+    "status": "in_progress",
+    "startDate": "2025-03-01",
+    "endDate": "2025-06-15",
+    "volunteersNeeded": 12,
+    "tags": ["environment", "gardening"]
+  },
+  {
+    "id": 2,
+    "name": "Literacy Tutoring Program",
+    "summary": "Pair volunteers with adult learners for one-on-one tutoring.",
+    "status": "planned",
+    "startDate": "2025-07-05",
+    "endDate": "2025-12-18",
+    "volunteersNeeded": 20,
+    "tags": ["education", "mentorship"]
+  },
+  {
+    "id": 3,
+    "name": "Neighborhood Cleanup",
+    "summary": "Quarterly litter pick-up across downtown corridors.",
+    "status": "completed",
+    "startDate": "2025-02-10",
+    "endDate": "2025-02-10",
+    "volunteersNeeded": 30,
+    "tags": ["environment", "beautification"]
+  },
+  {
+    "id": 4,
+    "name": "Food Pantry Restock",
+    "summary": "Inventory donations and pack emergency food boxes.",
+    "status": "in_progress",
+    "startDate": "2025-04-20",
+    "endDate": "2025-05-30",
+    "volunteersNeeded": 18,
+    "tags": ["hunger", "logistics"]
+  },
+  {
+    "id": 5,
+    "name": "Technology Refurbish Lab",
+    "summary": "Refurbish donated laptops for students in need.",
+    "status": "planned",
+    "startDate": "2025-05-15",
+    "endDate": "2025-08-01",
+    "volunteersNeeded": 10,
+    "tags": ["technology", "education"]
+  },
+  {
+    "id": 6,
+    "name": "After-School Sports Mentors",
+    "summary": "Coach youth sports leagues and promote healthy habits.",
+    "status": "in_progress",
+    "startDate": "2025-01-15",
+    "endDate": "2025-11-30",
+    "volunteersNeeded": 25,
+    "tags": ["youth", "sports"]
+  },
+  {
+    "id": 7,
+    "name": "Senior Home Companions",
+    "summary": "Provide weekly visits and errands support for seniors.",
+    "status": "on_hold",
+    "startDate": "2024-09-01",
+    "endDate": "2025-12-31",
+    "volunteersNeeded": 15,
+    "tags": ["seniors", "care"]
+  },
+  {
+    "id": 8,
+    "name": "Mobile Health Clinic",
+    "summary": "Assist nurses with intake forms at pop-up clinics.",
+    "status": "in_progress",
+    "startDate": "2025-02-01",
+    "endDate": "2025-10-30",
+    "volunteersNeeded": 16,
+    "tags": ["health", "outreach"]
+  },
+  {
+    "id": 9,
+    "name": "Coding for Teens",
+    "summary": "Weekend workshops introducing teens to programming.",
+    "status": "planned",
+    "startDate": "2025-06-01",
+    "endDate": "2025-09-15",
+    "volunteersNeeded": 14,
+    "tags": ["technology", "education"]
+  },
+  {
+    "id": 10,
+    "name": "Shelter Meal Prep",
+    "summary": "Cook nutritious dinners for the overnight shelter.",
+    "status": "completed",
+    "startDate": "2025-03-05",
+    "endDate": "2025-03-05",
+    "volunteersNeeded": 22,
+    "tags": ["hunger", "hospitality"]
+  },
+  {
+    "id": 11,
+    "name": "Youth Career Day",
+    "summary": "Coordinate speakers and logistics for career exploration.",
+    "status": "on_hold",
+    "startDate": "2025-04-01",
+    "endDate": "2025-04-30",
+    "volunteersNeeded": 8,
+    "tags": ["youth", "career"]
+  },
+  {
+    "id": 12,
+    "name": "Disaster Relief Training",
+    "summary": "Prepare volunteers for emergency deployment.",
+    "status": "in_progress",
+    "startDate": "2025-05-01",
+    "endDate": "2025-09-01",
+    "volunteersNeeded": 40,
+    "tags": ["emergency", "training"]
+  }
+]

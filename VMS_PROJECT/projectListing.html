@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Volunteer Project Listings</title>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+    <main>
+        <section class="panel">
+            <h1>Volunteer Projects</h1>
+            <p class="description">Search and filter active volunteer projects to quickly match people with the right opportunity.</p>
+
+            <form id="filters">
+                <div>
+                    <label for="searchInput">Search projects</label>
+                    <input id="searchInput" type="text" name="search" placeholder="e.g. garden, tutoring" autocomplete="off" />
+                </div>
+
+                <div>
+                    <label for="statusSelect">Status</label>
+                    <select id="statusSelect" name="status">
+                        <option value="">All statuses</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="perPageSelect">Results per page</label>
+                    <select id="perPageSelect" name="per_page">
+                        <option value="3">3</option>
+                        <option value="6" selected>6</option>
+                        <option value="9">9</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+
+                <div class="filter-actions">
+                    <button type="submit" class="nav primary">Apply Filters</button>
+                    <button type="button" class="nav secondary" id="resetFilters">Reset</button>
+                </div>
+            </form>
+
+            <div id="listStatus">Loading projects...</div>
+            <div id="projectList" class="projects" role="list"></div>
+            <div id="message" role="status" aria-live="polite"></div>
+
+            <div class="pagination">
+                <button type="button" class="nav" id="prevPage" disabled>Previous</button>
+                <span id="pageDisplay">Page 1 of 1</span>
+                <button type="button" class="nav" id="nextPage" disabled>Next</button>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>
