@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Management</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+
+<div class="container">
+    <h2> User Profile Management</h2>
+
+    <?php 
+    if (!empty($update_message)) {
+        echo '<div class="message success">' . htmlspecialchars($update_message) . '</div>';
+    }
+    if (!empty($error_message)) {
+        echo '<div class="message error"><ul>';
+        // Assuming $error_message might contain multiple errors separated by <br>
+        $errors = explode('<br>', trim($error_message, '<br>'));
+        foreach ($errors as $err) {
+            if (!empty($err)) {
+                echo '<li>' . htmlspecialchars($err) . '</li>';
+            }
+        }
+        echo '</ul></div>';
+    }
+    ?>
+
+    <h3>Update Personal Information</h3>
+    <form method="POST" action="profile.php">
+        <input type="hidden" name="update_profile" value="1">
+        
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" value="<?php echo htmlspecialchars($user['first_name'] ?? ''); ?>" required>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" value="<?php echo htmlspecialchars($user['last_name'] ?? ''); ?>" required>
+        
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>">
+        
+        <button type="submit" class="btn primary">Update Information</button>
+    </form>
+
+    <hr>
+
+    <h3>Change Password</h3>
+    <form method="POST" action="profile.php">
+        <input type="hidden" name="change_password" value="1">
+        
+        <label for="current_password">Current Password:</label>
+        <input type="password" id="current_password" name="current_password" required>
+        
+        <label for="new_password">New Password:</label>
+        <input type="password" id="new_password" name="new_password" required>
+        
+        <label for="confirm_password">Confirm New Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+        
+        <button type="submit" class="btn primary">Change Password</button>
+    </form>
+</div>
+
+</body>
+</html>
