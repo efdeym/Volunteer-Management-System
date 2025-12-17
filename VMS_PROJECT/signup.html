@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VolunteerHub Signup </title>
+<meta name="viewport" content="width=device-width, initial-scale=4">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="section-header">
+
+<main class="hero-grid">
+  
+  <img src="assets/logo.svg" alt="VMS logo" >
+
+  <h1>Create Volunteer Profile</h1>
+  <p class="alert success" style="display:none;">Registration successful!</p>
+
+  <div class="alert danger" style="display:none;">
+    <ul>
+      <li>Error message here</li>
+    </ul>
+  </div>
+
+  <form class="form-grid">
+
+    <label for="first name" style="color:aliceblue">First Name
+      <input type="text" placeholder="e.g. John" required>
+    </label>
+
+    <label for="last name" style="color:aliceblue">Last Name 
+      <input type="text" placeholder="e.g. Doe" required>
+    </label>
+
+    <label for="phone number" style="color:aliceblue">Phone Number
+      <input type="tel" placeholder="+90 *** *** ** **" required>
+    </label>
+
+    <label for="email" style="color: aliceblue"> Email Address
+      <input type="email" placeholder="example@mail.com" required>
+      </label>
+
+    <label for="password" style="color:aliceblue">Password
+      <input type="password" placeholder="Enter a password">
+    </label>
+
+    <label for="confirm password" style="color:aliceblue">Confirm Password
+      <input type="password" placeholder="Confirm your password" required>
+    </label>
+    
+    <button class="btn primary narrow-btn" type="button">Register</button>
+
+    <p class="auth-switch">
+      Already registered?
+      <a href="login.html">Log in</a>
+    </p>
+  </form>
+
+</main>
+
+</body>
+</html>

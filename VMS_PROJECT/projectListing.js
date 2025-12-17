@@ -1,4 +1,4 @@
-﻿const API_URL = "api/projects.php";
+﻿const API_URL = "apiProject.php";
 const DEFAULT_PER_PAGE = 6;
 
 const state = {
@@ -56,6 +56,15 @@ function bindEvents() {
     if (elements.resetBtn) {
         elements.resetBtn.addEventListener("click", handleResetFilters);
     }
+
+    // Delegate apply button clicks
+    elements.list.addEventListener('click', (ev) => {
+        const btn = ev.target.closest && ev.target.closest('.apply-btn');
+        if (!btn) return;
+        const id = btn.getAttribute('data-id');
+        if (!id) return;
+        applyToProject(Number(id));
+    });
 }
 
 function handleResetFilters() {
@@ -132,11 +141,44 @@ function renderProjects(projects) {
                         <span><strong>End</strong>${project.endDate ?? "TBD"}</span>
                     </div>
                     <div class="tags">${tags}</div>
+                    <div class="project-actions">
+                        <button class="nav apply-btn" data-id="${project.id}">Apply</button>
+                    </div>
                 </article>`;
         })
         .join("");
 
     elements.list.innerHTML = markup;
+}
+
+async function applyToProject(projectId) {
+    try {
+        const name = window.prompt('Your full name');
+        if (!name) { return; }
+        const email = window.prompt('Your email address');
+        if (!email) { return; }
+        const message = window.prompt('Optional message (availability, skills, etc.)') || '';
+
+        elements.message.textContent = 'Submitting application...';
+
+        const resp = await fetch(`${API_URL}?action=apply`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ project_id: projectId, applicant_name: name, applicant_email: email, message }),
+        });
+
+        const payload = await resp.json();
+        if (!resp.ok || !payload.success) {
+            console.error(payload);
+            elements.message.textContent = payload.error || 'Failed to submit application';
+            return;
+        }
+        elements.message.textContent = 'Application submitted — thank you!';
+        setTimeout(() => { if (elements.message.textContent === 'Application submitted — thank you!') elements.message.textContent = ''; }, 4000);
+    } catch (err) {
+        console.error(err);
+        elements.message.textContent = 'Unexpected error while submitting application.';
+    }
 }
 
 function renderMeta(payload) {

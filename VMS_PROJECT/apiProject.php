@@ -15,6 +15,17 @@ try {
         status TEXT,
         created_at TEXT DEFAULT CURRENT_TIMESTAMP
     )");
+    // Applications table to store volunteer applications for projects
+    $pdo->exec("CREATE TABLE IF NOT EXISTS applications (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        project_id INTEGER NOT NULL,
+        applicant_name TEXT NOT NULL,
+        applicant_email TEXT NOT NULL,
+        message TEXT,
+        status TEXT NOT NULL DEFAULT 'pending',
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE
+    )");
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['success' => false, 'error' => 'DB error: ' . $e->getMessage()]);
@@ -74,6 +85,34 @@ if ($action === 'update') {
         ':id'=>$id
     ]);
     jsonOut(['success'=>true,'rows'=>$stmt->rowCount()]);
+}
+
+if ($action === 'apply') {
+    $input = json_decode(file_get_contents('php://input'), true) ?: $_POST;
+    $project_id = isset($input['project_id']) ? (int)$input['project_id'] : (isset($_GET['project_id']) ? (int)$_GET['project_id'] : 0);
+    $name = trim((string)($input['applicant_name'] ?? ''));
+    $email = trim((string)($input['applicant_email'] ?? ''));
+    $message = trim((string)($input['message'] ?? ''));
+
+    if ($project_id <= 0) { http_response_code(400); jsonOut(['success'=>false,'error'=>'Invalid project id']); }
+    if ($name === '' || $email === '') { http_response_code(400); jsonOut(['success'=>false,'error'=>'Name and email are required']); }
+
+    // ensure project exists
+    $stmt = $pdo->prepare('SELECT id FROM projects WHERE id = :id');
+    $stmt->execute([':id' => $project_id]);
+    $proj = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$proj) { http_response_code(404); jsonOut(['success'=>false,'error'=>'Project not found']); }
+
+    $ins = $pdo->prepare('INSERT INTO applications (project_id, applicant_name, applicant_email, message, status) VALUES (:pid, :name, :email, :msg, :status)');
+    $ins->execute([
+        ':pid' => $project_id,
+        ':name' => $name,
+        ':email' => $email,
+        ':msg' => $message,
+        ':status' => 'pending'
+    ]);
+
+    jsonOut(['success' => true, 'id' => $pdo->lastInsertId()]);
 }
 
 http_response_code(400);

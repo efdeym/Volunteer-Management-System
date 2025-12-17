@@ -156,8 +156,8 @@ h1 {margin:12px 0;font-size:40px;}
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 26px;    
-  border-radius: 999px;     
+  padding: 12px 12px;    
+  border-radius: 400px;     
   font-weight: 600;
   border: none;
   cursor: pointer;
@@ -171,6 +171,12 @@ h1 {margin:12px 0;font-size:40px;}
   background: rgba(255,255,255,0.15);
   color: #fff;
   border: 1px solid rgba(255,255,255,0.4);
+}
+.narrow-btn {
+    width: 250px;     
+    padding: 10px 0;  
+    margin: 0 auto;   
+    display: block;
 }
 .btn.ghost {
   border: 1px solid var(--border);
@@ -325,9 +331,21 @@ h1 {margin:12px 0;font-size:40px;}
 }
 .auth-logo {width:64px;margin-bottom:12px;}
 .form-grid {
-  display:flex;
+  display: flex;
   flex-direction:column;
+  width: 450px;
   gap:16px;
+}
+.form {
+  display: flex;
+  gap: 20px;          
+  align-items: center;
+}
+.form-row {
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  gap: 8px;
 }
 label {
   display:flex;
@@ -529,6 +547,7 @@ th, td {
   border-radius:var(--radius);
   padding:24px;
   box-shadow:var(--shadow);
+  width: auto;
 }
 .contact-channel-section .card {
   border:none;

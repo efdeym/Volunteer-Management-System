@@ -1,9 +1,4 @@
 <?php
-
-// Start the session if not already started (hesaba giriş yapılmasıysa)
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 require_once __DIR__ . '/db.php';
 
 $errors = [];
@@ -14,29 +9,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
-    if (empty($errors)) {
-    $stmt = $pdo->prepare('SELECT u.user_id, u.first_name, u.last_name, u.email, u.password_hash, r.role_name 
-                           FROM Users u
-                           JOIN Roles r ON u.role_id = r.role_id 
-                           WHERE u.email = ? LIMIT 1');
+    if ($email === '' || $password === '') {
+        $errors[] = 'Please fill in all fields.';
+    } else {
+        $stmt = $pdo->prepare("
+            SELECT user_id, first_name, last_name, email, password_hash, role_id
+            FROM Users
+            WHERE email = ?
+            LIMIT 1
+        ");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $stmt->execute([$email]);
-    $user = $stmt->fetch();
-
-    if (!$user || !password_verify($password, $user['password_hash'])) { 
-            $errors[] = 'Invalid email or password.';
+        if (!$user || !password_verify($password, $user['password_hash'])) {
+            $errors[] = "Invalid email or password.";
         } else {
+            session_start();
             $_SESSION['user'] = [
-                'user_id' => (int)$user['user_id'],
-                'name' => $user['first_name'] . ' ' . $user['last_name'],
-                'email' => $user['email'],
-                'role_name' => $user['role_name'],
+                'user_id' => $user['user_id'],
+                'name'    => $user['first_name'] . " " . $user['last_name'],
+                'email'   => $user['email'],
+                'role_id' => $user['role_id']
             ];
-        header('Location: ' . ($user['role_name'] === 'Admin' ? 'admin.php' : 'dashboard.php'));
-        exit;
+
+            if ($user['role_id'] == 1) {
+                header("Location: volunteer_dashboard.php");
+                exit;
+            } 
+            if ($user['role_id'] == 2) {
+                header("Location: manager_dashboard.php");
+                exit;
+            } 
+            if ($user['role_id'] == 3) {
+                header("Location: admin.php");
+                exit;
+            }
+        }
     }
-  }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
