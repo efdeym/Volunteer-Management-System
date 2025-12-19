@@ -501,6 +501,11 @@
                 <input type="text" class="search-box" id="searchBox" placeholder="Search employees...">
                 <button class="btn btn-primary" onclick="openAddEmployeeModal()">+ Add Employee</button>
                 <button class="btn btn-secondary" onclick="openAddDeptModal()">+ Add Department</button>
+                <div style="display:flex; align-items:center; gap:10px; margin-left:8px;">
+                    <span id="userLabel" style="color:#333; font-weight:600;"></span>
+                    <button id="loginBtn" class="btn btn-secondary" onclick="openLoginModal()">Log in</button>
+                    <button id="logoutBtn" class="btn btn-secondary" style="display:none" onclick="logout()">Logout</button>
+                </div>
             </div>
         </header>
 
@@ -559,6 +564,30 @@
                     <div class="chart-container" id="orgChartContainer"></div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign in</h2>
+                <span class="close" onclick="closeLoginModal()">&times;</span>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Username or Email</label>
+                    <input type="text" id="loginUsername" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeLoginModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </div>
+            </form>
         </div>
     </div>
 
