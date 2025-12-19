@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel – VMS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="site-body">
+
+<header >
+  <div class="brand">
+    <img src="assets/logo.svg" alt="VMS logo">
+    <div>
+      <strong>Admin Panel</strong>
+    </div>
+  </div>
+
+</header>
+
+<main class="section">
+
+  <section >
+    <header>
+      <h2>Create Event</h2>
+      <p>Publish a new volunteer opportunity.</p>
+    </header>
+
+    <form class="form-grid">
+      <label for="Title" style="color:aliceblue"> Title <input type="text" placeholder="Event title" ></label>
+      <label for="Date" style="color:aliceblue"> Date <input type="date"></label>
+      <label for="Description" style="color:aliceblue"> Description <textarea rows="3" placeholder="Event description..."></textarea></label>
+      <button class="btn primary narrow-btn" type="button">Publish Event</button>
+    </form>
+    
+  </section>
+  
+
+</main>
+<div class="header-actions">
+    <a class="pill" href="dashboard.php">Dashboard</a>
+    <a class="pill" href="logout.php">Logout</a>
+  </div>
+</body>
+</html>
