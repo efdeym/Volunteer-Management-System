@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body class="site-body">
+<nav class="site-nav">
+    <div class="brand">
+      <img src="assets/logo.svg" alt="VMS logo">
+    </div>
+    <div class="nav-name">Programs</div>
+    <button class="nav-toggle" data-nav-toggle aria-label="Toggle navigation">Menu</button>
+    <div class="nav-links" data-nav>
+       <a href="index.html" class="pill">Home</a>
+       <a href="about.html" class="pill">About</a>
+       <a href="programs.html" class="pill">Programs</a>
+       <a href="resources.html" class="pill">Resources</a>
+       <a href="partners.html" class="pill">Partners</a>
+       <a href="contact.html" class="pill">Contact</a>
+       <a href="Profile.html" class="pill">Profile</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle color theme">Shift Colors</button>
+    </div>
+    </div>
+  </nav>
+<div class="nav-name">User Panel</div>
+
+<main class="main">
+
+    <section class="card">
+        <h3>Profile Information</h3>
+        <p><strong>Name:</strong>  John Doe</p>
+        <p><strong>Email:</strong> johndoe@email.com</p>
+        <p><strong>Phone:</strong> 5551234567</p>
+
+        <button id="changePasswordBtn" type="button" class="btn secondary">
+            Change Password
+        </button>
+    </section>
+
+    <section class="card">
+        <h3>Update Profile</h3>
+        <form>
+            <input type="text" placeholder="First Name" >
+            <input type="text" placeholder="Last Name" >
+            <input type="text" placeholder="Phone" >
+            <button type="button" class="btn primary">Save Changes</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h3>Past Activities</h3>
+        <div id="pastActivities">
+            <p id="activitiesLoading">Loading past activities…</p>
+        </div>
+    </section>
+
+<script>
+function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+async function loadPastActivities() {
+    const container = document.getElementById('pastActivities');
+    const loading = document.getElementById('activitiesLoading');
+    try {
+        const res = await fetch('user_activities.php');
+        if (res.status === 401) {
+            container.innerHTML = '<p>Please <a href="login.php">log in</a> to see your activities.</p>';
+            return;
+        }
+        const data = await res.json();
+        if (!data || !data.success) {
+            container.innerHTML = '<p>Error loading activities.</p>';
+            return;
+        }
+        const activities = data.activities || [];
+        if (activities.length === 0) {
+            container.innerHTML = '<p>No past activities.</p>';
+            return;
+        }
+
+        const ul = document.createElement('ul');
+        activities.forEach(a => {
+            const li = document.createElement('li');
+            const status = a.participation_status || a.application_status || 'Approved';
+            let html = '<strong>' + escapeHtml(a.title) + '</strong><br>';
+            html += (a.event_date ? escapeHtml(a.event_date) : 'Unknown date') + ' – <strong>Status:</strong> ' + escapeHtml(status);
+            if (a.hours_logged !== null && a.hours_logged !== undefined) {
+                html += ' – <strong>Hours:</strong> ' + escapeHtml(String(a.hours_logged));
+            }
+            if (a.application_date) {
+                html += '<div class="muted">Applied: ' + escapeHtml(a.application_date) + '</div>';
+            }
+            li.innerHTML = html;
+            ul.appendChild(li);
+        });
+        container.innerHTML = '';
+        container.appendChild(ul);
+    } catch (err) {
+        container.innerHTML = '<p>Error fetching activities.</p>';
+        console.error(err);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadPastActivities);
+</script>
+
+</main>
+
+<script>
+document.getElementById("changePasswordBtn").addEventListener("click", function () {
+    const box = document.getElementById("passwordBox");
+    box.style.display = box.style.display === "none" ? "block" : "none";
+});
+
+const pwForm = document.getElementById('changePasswordForm');
+if (pwForm) {
+    pwForm.addEventListener('submit', function (e) {
+        const newPw = document.getElementById('new_password').value;
+        const confirm = document.getElementById('confirm_password').value;
+        const errorDiv = document.getElementById('passwordError');
+        errorDiv.style.display = 'none';
+        errorDiv.textContent = '';
+
+        if (newPw.length < 8) {
+            e.preventDefault();
+            errorDiv.textContent = 'New password must be at least 8 characters.';
+            errorDiv.style.display = 'block';
+            return;
+        }
+        if (newPw !== confirm) {
+            e.preventDefault();
+            errorDiv.textContent = 'Passwords do not match.';
+            errorDiv.style.display = 'block';
+            return;
+        }
+    });
+}
+</script>
+ <section id="passwordBox" class="card" ">
+        <h3>Change Password</h3>
+        <form method="POST" action="profile.php" id="changePasswordForm" novalidate>
+            <input type="password" name="current_password" placeholder="Current Password" required>
+            <input type="password" name="new_password" id="new_password" placeholder="New Password required>
+            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm New Password" required>
+            <button type="submit" name="change_password" class="btn primary">Save Password</button>
+             <br><small>(min 8 chars, include letters & numbers)" pattern="(?=^.{8,}$)(?=.*[A-Za-z])(?=.*\d).*$" </small>
+            <div id="passwordError" class="error" style="display:none; margin-top:8px;"></div>
+        </form>
+    </section>
+</body>
+</html>

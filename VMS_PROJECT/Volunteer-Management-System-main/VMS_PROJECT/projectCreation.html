@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Volunteer Project Creation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="brand">Volunteer<span class="accent">Hub</span></div>
+            <nav class="nav">
+                <a href="index.html">Projects</a>
+                <a href="#create">Create</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title">Manage Your Volunteer Projects</h1>
+            <p class="hero-subtitle">Create, track, and organize community initiatives effortlessly.</p>
+        </div>
+    </div>
+
+    <main class="container">
+
+        <div class="grid">
+            <section id="create" class="card card-form">
+                <div class="card-header">
+                    <h2>Create New Project</h2>
+                    <p class="card-subtitle">Start a new volunteer initiative</p>
+                </div>
+                <form id="createForm">
+                    <label class="field">
+                        <span class="label-text">Project Title</span>
+                        <input name="title" required placeholder="e.g., Community Garden Cleanup">
+                    </label>
+                    <label class="field">
+                        <span class="label-text">Description</span>
+                        <textarea name="description" placeholder="What is this project about?"></textarea>
+                    </label>
+                    <div class="row two-cols">
+                        <label class="field">
+                            <span class="label-text">Start Date</span>
+                            <input type="date" name="start_date">
+                        </label>
+                        <label class="field">
+                            <span class="label-text">End Date</span>
+                            <input type="date" name="end_date">
+                        </label>
+                    </div>
+                    <label class="field">
+                        <span class="label-text">Status</span>
+                        <select name="status">
+                            <option value="planned">Planned</option>
+                            <option value="active">Active</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </label>
+                    <div class="actions">
+                        <button class="btn primary" type="submit">Create Project</button>
+                        <button class="btn ghost" type="reset">Reset</button>
+                    </div>
+                </form>
+            </section>
+
+            <section id="list" class="card card-list">
+                <div class="card-header">
+                    <h2>Active Projects</h2>
+                    <p class="card-subtitle" id="project-count"></p>
+                </div>
+                <div id="projects" class="projects"></div>
+            </section>
+        </div>
+    </main>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <footer class="site-footer">
+        <div class="container"></div>
+    </footer>
+
+    <script src="assets/app.js" defer></script>
+</body>
+
+</html>

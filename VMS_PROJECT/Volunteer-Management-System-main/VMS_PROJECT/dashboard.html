@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Volunteer Dashboard </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="site-body">
+<nav class="site-nav">
+    <div class="brand">
+      <img src="assets/logo.svg" alt="VMS logo">
+    </div>
+    <div class="nav-name">Admin Panel</div>
+    <button class="nav-toggle" data-nav-toggle aria-label="Toggle navigation">Menu</button>
+    <div class="nav-links" data-nav>
+       <a href="index.html" class="pill">Home</a>
+       <a href="about.html" class="pill">About</a>
+       <a href="programs.html" class="pill">Programs</a>
+       <a href="resources.html" class="pill">Resources</a>
+       <a href="partners.html" class="pill">Partners</a>
+       <a href="contact.html" class="pill">Contact</a>
+       <a href="Profile.html" class="pill">Profile</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle color theme">Shift Colors</button>
+    </div>
+  </nav>
+<header class="site-header">
+  <div class="brand">
+    <img src="assets/logo.svg" alt="VMS logo">
+    <div>
+      <strong>Volunteer Management System</strong>
+    </div>
+  </div>
+  <div class="header-actions">
+    <a class="pill" href="index.html">Home</a>
+    <a class="pill" href="logout.php">Logout</a>
+  </div>
+</header>
+
+<main class="section dashboard">
+
+  <section class="feature-card">
+    <article>
+      <h3>Available Projects</h3>
+      <p>3</p>
+    </article>
+
+    <article>
+      <h3>Projects Applied</h3>
+      <p>1</p>
+    </article>
+
+    <article>
+      <h3>Role</h3>
+      <p>Volunteer</p>
+    </article>
+  </section>
+
+  <section >
+    <header>
+      <h2>Available Projects</h2>
+      <p>Select a project to apply.</p>
+    </header>
+
+    <div class="section" >
+
+      <article class="form-grid">
+        <div>
+          <h3>Community Food Drive</h3>
+          <p>Starts: December 5, 2025</p>
+          <p>Helping distribute food packages to families in need.</p>
+        </div>
+        <button class="btn primary">Apply Now</button>
+      </article>
+
+      <article class="form-grid">
+        <div>
+          <h3>STEM Mentorship Program</h3>
+          <p>Starts: December 12, 2025</p>
+          <p>Mentoring students interested in science and technology.</p>
+        </div>
+        <button class="btn ghost" disabled>Apply Now</button>
+      </article>
+
+
+      <article class="form-grid">
+        <div>
+          <h3>Beach Cleanup</h3>
+          <p>Starts: December 20, 2025</p>
+          <p>Cleaning the coastline and raising environmental awareness.</p>
+        </div>
+        <button class="btn primary">Apply Now</button>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
