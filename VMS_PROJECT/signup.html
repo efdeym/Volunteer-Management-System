@@ -8,7 +8,23 @@
 </head>
 
 <body class="section-header">
-
+<nav class="site-nav">
+    <div class="brand">
+      <img src="assets/logo.svg" alt="VMS logo">
+    </div>
+    <div class="nav-name">Admin Panel</div>
+    <button class="nav-toggle" data-nav-toggle aria-label="Toggle navigation">Menu</button>
+    <div class="nav-links" data-nav>
+       <a href="index.html" class="pill">Home</a>
+       <a href="about.html" class="pill">About</a>
+       <a href="programs.html" class="pill">Programs</a>
+       <a href="resources.html" class="pill">Resources</a>
+       <a href="partners.html" class="pill">Partners</a>
+       <a href="contact.html" class="pill">Contact</a>
+       <a href="Profile.html" class="pill">Profile</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle color theme">Shift Colors</button>
+    </div>
+  </nav>
 <main class="hero-grid">
   
   <img src="assets/logo.svg" alt="VMS logo" >
@@ -46,6 +62,7 @@
 
     <label for="confirm password" style="color:aliceblue">Confirm Password
       <input type="password" placeholder="Confirm your password" required>
+      <br><small>Minimum 8 characters, include letters & numbers  </small>
     </label>
     
     <button class="btn primary narrow-btn" type="button">Register</button>
