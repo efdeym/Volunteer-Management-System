@@ -1,7 +1,9 @@
-// Organizational Dashboard JavaScript (client -> PHP API)
+﻿// Organizational Dashboard JavaScript (client -> PHP API)
 
 let employees = [];
 let departments = [];
+let editingEmployeeId = null;
+let editingDeptId = null;
 
 const apiBase = './api.php';
 const authBase = './auth.php';
@@ -164,7 +166,7 @@ function renderDepartmentsList() {
         item.className = 'department-item';
         item.innerHTML = `
             <div>
-                <div class="dept-name">ğŸ“ ${dept.name}</div>
+                <div class="dept-name">Dept: ${dept.name}</div>
                 <p style="color: #999; font-size: 12px; margin-top: 5px;">Head: ${dept.head}</p>
                 <p style="color: #999; font-size: 12px;">Budget: $${dept.budget.toLocaleString()}</p>
             </div>
@@ -235,7 +237,35 @@ function getDepartmentColor(deptName) {
     return colors[deptName] || '#667eea';
 }
 
-// Add employee
+function setEmployeeFormMode(isEdit) {
+    const title = document.getElementById('employeeModalTitle');
+    const submit = document.getElementById('employeeSubmitBtn');
+    if (title) title.textContent = isEdit ? 'Edit Employee' : 'Add New Employee';
+    if (submit) submit.textContent = isEdit ? 'Save Changes' : 'Add Employee';
+}
+
+function setDeptFormMode(isEdit) {
+    const title = document.getElementById('deptModalTitle');
+    const submit = document.getElementById('deptSubmitBtn');
+    if (title) title.textContent = isEdit ? 'Edit Department' : 'Add New Department';
+    if (submit) submit.textContent = isEdit ? 'Save Changes' : 'Add Department';
+}
+
+function resetEmployeeForm() {
+    const form = document.getElementById('employeeForm');
+    if (form) form.reset();
+    editingEmployeeId = null;
+    setEmployeeFormMode(false);
+}
+
+function resetDeptForm() {
+    const form = document.getElementById('departmentForm');
+    if (form) form.reset();
+    editingDeptId = null;
+    setDeptFormMode(false);
+}
+
+// Add or update employee
 function addEmployee(e) {
     e.preventDefault();
     const name = document.getElementById('empName').value.trim();
@@ -250,29 +280,30 @@ function addEmployee(e) {
     }
 
     const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-
+    const isEdit = Boolean(editingEmployeeId);
     const payload = { name, email, department: dept, position, phone: phone || 'N/A', avatar: initials };
-    fetchJson(apiBase + '?action=add_employee', {
+    if (isEdit) payload.id = editingEmployeeId;
+
+    fetchJson(apiBase + '?action=' + (isEdit ? 'update_employee' : 'add_employee'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     }).then(res => {
         closeAddEmployeeModal();
-        document.getElementById('employeeForm').reset();
         fetchDashboard();
-        showNotification('Employee added successfully!');
+        showNotification(isEdit ? 'Employee updated successfully!' : 'Employee added successfully!');
     }).catch(err => {
         console.error(err);
-        alert('Failed to add employee. Make sure you are logged in.');
+        alert('Failed to ' + (isEdit ? 'update' : 'add') + ' employee. Make sure you are logged in.');
     });
 }
 
-// Add department
+// Add or update department
 function addDepartment(e) {
     e.preventDefault();
     const name = document.getElementById('deptName').value.trim();
     const head = document.getElementById('deptHead').value.trim();
-    const budget = parseInt(document.getElementById('deptBudget').value);
+    const budget = parseInt(document.getElementById('deptBudget').value, 10);
     const desc = document.getElementById('deptDesc').value.trim();
 
     if (!name || !head || !budget || !desc) {
@@ -280,19 +311,21 @@ function addDepartment(e) {
         return;
     }
 
+    const isEdit = Boolean(editingDeptId);
     const payload = { name, head, budget, description: desc };
-    fetchJson(apiBase + '?action=add_department', {
+    if (isEdit) payload.id = editingDeptId;
+
+    fetchJson(apiBase + '?action=' + (isEdit ? 'update_department' : 'add_department'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     }).then(res => {
         closeAddDeptModal();
-        document.getElementById('departmentForm').reset();
         fetchDashboard();
-        showNotification('Department added successfully!');
+        showNotification(isEdit ? 'Department updated successfully!' : 'Department added successfully!');
     }).catch(err => {
         console.error(err);
-        alert('Failed to add department. Make sure you are logged in.');
+        alert('Failed to ' + (isEdit ? 'update' : 'add') + ' department. Make sure you are logged in.');
     });
 }
 
@@ -328,14 +361,38 @@ function deleteDept(id) {
     }
 }
 
-// Edit employee (placeholder)
+// Edit employee
 function editEmployee(id) {
-    alert('Edit functionality coming soon!');
+    const emp = employees.find(e => String(e.id) == String(id));
+    if (!emp) {
+        alert('Employee not found');
+        return;
+    }
+    editingEmployeeId = emp.id;
+    document.getElementById('empName').value = emp.name || '';
+    document.getElementById('empEmail').value = emp.email || '';
+    populateDepartmentSelect();
+    document.getElementById('empDept').value = emp.department || '';
+    document.getElementById('empPosition').value = emp.position || '';
+    document.getElementById('empPhone').value = emp.phone === 'N/A' ? '' : (emp.phone || '');
+    setEmployeeFormMode(true);
+    document.getElementById('addEmployeeModal').style.display = 'block';
 }
 
-// Edit department (placeholder)
+// Edit department
 function editDept(id) {
-    alert('Edit functionality coming soon!');
+    const dept = departments.find(d => String(d.id) == String(id));
+    if (!dept) {
+        alert('Department not found');
+        return;
+    }
+    editingDeptId = dept.id;
+    document.getElementById('deptName').value = dept.name || '';
+    document.getElementById('deptHead').value = dept.head || '';
+    document.getElementById('deptBudget').value = dept.budget || '';
+    document.getElementById('deptDesc').value = dept.description || '';
+    setDeptFormMode(true);
+    document.getElementById('addDeptModal').style.display = 'block';
 }
 
 // Populate department select
@@ -452,19 +509,23 @@ function switchTab(e, tabName) {
 
 // Modal functions
 function openAddEmployeeModal() {
+    resetEmployeeForm();
     document.getElementById('addEmployeeModal').style.display = 'block';
 }
 
 function closeAddEmployeeModal() {
     document.getElementById('addEmployeeModal').style.display = 'none';
+    resetEmployeeForm();
 }
 
 function openAddDeptModal() {
+    resetDeptForm();
     document.getElementById('addDeptModal').style.display = 'block';
 }
 
 function closeAddDeptModal() {
     document.getElementById('addDeptModal').style.display = 'none';
+    resetDeptForm();
 }
 
 // Close modal when clicking outside
@@ -521,3 +582,5 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+
