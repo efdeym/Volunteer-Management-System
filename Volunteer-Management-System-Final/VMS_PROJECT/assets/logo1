@@ -1,0 +1,10 @@
+<svg width="300" height="80" viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round">
+    <circle cx="40" cy="40" r="20"/>
+    <path d="M40 20 L40 35"/>
+    <path d="M30 50 Q40 60 50 50"/>
+  </g>
+  <text x="80" y="50" font-size="32" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="600">
+    VolunteerHub
+  </text>
+</svg>

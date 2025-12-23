@@ -1,0 +1,36 @@
+<svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+  <rect width="520" height="320" rx="18" fill="#f7f8ff"/>
+  <g stroke="#1f5eff" stroke-width="2" fill="none">
+    <ellipse cx="240" cy="90" rx="90" ry="40"/>
+    <ellipse cx="240" cy="190" rx="100" ry="44"/>
+    <ellipse cx="240" cy="260" rx="90" ry="34"/>
+  </g>
+  <g font-family="Segoe UI, Arial" fill="#0b2f91" font-size="14" text-anchor="middle">
+    <text x="240" y="95">Register / Login</text>
+    <text x="240" y="195">View &amp; Join Events</text>
+    <text x="240" y="265">Logout &amp; Profile</text>
+  </g>
+  <g stroke="#0b2f91" stroke-width="2">
+    <line x1="60" y1="70" x2="150" y2="90"/>
+    <line x1="60" y1="150" x2="150" y2="150"/>
+    <line x1="60" y1="230" x2="150" y2="210"/>
+    <line x1="380" y1="140" x2="460" y2="140"/>
+    <line x1="380" y1="220" x2="460" y2="240"/>
+  </g>
+  <g font-family="Segoe UI, Arial" fill="#1f5eff" font-size="14">
+    <text x="50" y="60">Volunteer</text>
+    <text x="440" y="120" text-anchor="middle">Admin</text>
+  </g>
+  <g stroke="#1f5eff" stroke-width="2" fill="none">
+    <circle cx="50" cy="110" r="18"/>
+    <line x1="50" y1="128" x2="50" y2="180"/>
+    <line x1="30" y1="150" x2="70" y2="150"/>
+    <line x1="50" y1="180" x2="30" y2="220"/>
+    <line x1="50" y1="180" x2="70" y2="220"/>
+    <circle cx="460" cy="180" r="18"/>
+    <line x1="460" y1="198" x2="460" y2="250"/>
+    <line x1="440" y1="215" x2="480" y2="215"/>
+    <line x1="460" y1="250" x2="440" y2="290"/>
+    <line x1="460" y1="250" x2="480" y2="290"/>
+  </g>
+</svg>
