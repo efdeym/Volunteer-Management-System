@@ -1,98 +1,35 @@
-SET FOREIGN_KEY_CHECKS = 0;
-
-DROP TABLE IF EXISTS Applications;
-DROP TABLE IF EXISTS Projects;
-DROP TABLE IF EXISTS Organizations;
-DROP TABLE IF EXISTS User_Roles;
-DROP TABLE IF EXISTS Permissions;
-DROP TABLE IF EXISTS Roles;
-DROP TABLE IF EXISTS event_registrations;
-DROP TABLE IF EXISTS events;
-DROP TABLE IF EXISTS Users;
-
-SET FOREIGN_KEY_CHECKS = 1;
-
--- Roles
-CREATE TABLE IF NOT EXISTS Roles (
-  role_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  role_name VARCHAR(50) UNIQUE NOT NULL,
-  description VARCHAR(255) NULL,
-  created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  email VARCHAR(160) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  role ENUM('volunteer','admin') NOT NULL DEFAULT 'volunteer',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- Users 
-CREATE TABLE IF NOT EXISTS Users (
-  user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  role_id INT NULL,
-  email VARCHAR(255) NOT NULL UNIQUE,
-  password_hash VARCHAR(255) NOT NULL,
-  first_name VARCHAR(100) NOT NULL,
-  last_name VARCHAR(100) NOT NULL,
-  phone VARCHAR(20) NULL,
-  created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  CONSTRAINT fk_user_role FOREIGN KEY (role_id) REFERENCES Roles(role_id) ON DELETE SET NULL
+CREATE TABLE IF NOT EXISTS events (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(160) NOT NULL,
+  event_date DATE NOT NULL,
+  description TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- Permissions
-CREATE TABLE IF NOT EXISTS Permissions (
-  permission_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  permission_code VARCHAR(100) UNIQUE NOT NULL,
-  description VARCHAR(255) NOT NULL,
-  created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB;
-
--- User_Roles
-CREATE TABLE IF NOT EXISTS User_Roles (
-  user_roles_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS event_registrations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
-  role_id INT NOT NULL,
-  CONSTRAINT fk_ur_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
-  CONSTRAINT fk_ur_role FOREIGN KEY (role_id) REFERENCES Roles(role_id) ON DELETE CASCADE
+  event_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY unique_registration (user_id, event_id),
+  CONSTRAINT fk_reg_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  CONSTRAINT fk_reg_event FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- Organizations
-CREATE TABLE IF NOT EXISTS Organizations (
-  org_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  org_name VARCHAR(255) NOT NULL,
-  description TEXT NULL,
-  contact_user_id INT NOT NULL,
-  created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  CONSTRAINT fk_org_contact_user FOREIGN KEY (contact_user_id) REFERENCES Users(user_id) ON DELETE RESTRICT
-) ENGINE=InnoDB;
+INSERT INTO users (name, email, password, role)
+VALUES ('Project Admin', 'admin@vms.local', '$2y$10$gWS9Vyuk3F7S3w7Dnk3aHuJpN96CBrum1BgqsYqS2rCA0nVddOZXS', 'admin')
+ON DUPLICATE KEY UPDATE email = email;
 
--- Projects
-CREATE TABLE IF NOT EXISTS Projects (
-  project_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  org_id INT NOT NULL,
-  manager_id INT NOT NULL,
-  title VARCHAR(255) NOT NULL,
-  description TEXT NOT NULL,
-  location VARCHAR(255) NULL,
-  start_date DATE NULL,
-  end_date DATE NULL,
-  status VARCHAR(50) NOT NULL,
-  created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  CONSTRAINT fk_proj_org FOREIGN KEY (org_id) REFERENCES Organizations(org_id) ON DELETE CASCADE,
-  CONSTRAINT fk_proj_manager FOREIGN KEY (manager_id) REFERENCES Users(user_id) ON DELETE RESTRICT
-) ENGINE=InnoDB;
-
--- Applications 
-CREATE TABLE IF NOT EXISTS Applications (
-  application_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  project_id INT NOT NULL,
-  volunteer_id INT NOT NULL,
-  application_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  status VARCHAR(50) NOT NULL,
-  decision_date DATETIME NULL,
-  notes TEXT NULL,
-  created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  CONSTRAINT fk_app_project FOREIGN KEY (project_id) REFERENCES Projects(project_id) ON DELETE CASCADE,
-  CONSTRAINT fk_app_volunteer FOREIGN KEY (volunteer_id) REFERENCES Users(user_id) ON DELETE CASCADE
-) ENGINE=InnoDB;
-
+INSERT INTO events (title, event_date, description) VALUES
+('Community Food Drive', '2025-12-05', 'Help sort and deliver food donations to local shelters.'),
+('STEM Mentorship Night', '2025-12-12', 'Mentor students through science challenges.'),
+('Parks Clean-Up Blitz', '2026-01-08', 'Beautify four city parks in one day.');
